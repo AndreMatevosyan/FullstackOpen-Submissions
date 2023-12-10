@@ -1,15 +1,14 @@
 import { useState } from 'react'
 
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
+  const [ counter, setCounter ] = useState(0)
+  setTimeout(
+    () => setCounter(counter + 1),
+    1000
+  )
 
   return (
-    <div>
-      code here
-    </div>
+    <div>{counter}</div>
   )
 }
 
