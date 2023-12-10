@@ -1,30 +1,33 @@
 import { useState } from 'react'
 
-const Display = ({counter}) => <div>{counter}</div>
-
-const Button = ({onClick, text}) => {
-  return (
-  <button onClick={onClick}>
-    {text}
-  </button>
-  )
-}
-
 const App = () => {
-  const [ counter, setCounter ] = useState(0)
-  
-  const increaseByOne = () => setCounter(counter + 1)
+  const [clicks, setClicks] = useState({
+    left: 0, right: 0
+  })
 
-  const setToZero = () => setCounter(0)
+  const handleLeftClick = () => {
+    const newClicks = {
+      ...clicks,
+      left: clicks.left + 1,
+    }
+    setClicks(newClicks)
+  }
 
-  const decreaseByOne = () => setCounter(counter - 1)
+  const handleRightClick = () => {
+    const newClicks = {
+      ...clicks,
+      right: clicks.right + 1
+    }
+    setClicks(newClicks)
+  }
 
   return (
     <div>
-      <Display counter={counter}/>
-      <Button onClick={increaseByOne} text='Add'/>
-      <Button onClick={decreaseByOne} text='Subtract'/>
-      <Button onClick={setToZero} text='Reset' />
+      {clicks.left}
+      {clicks.buttonleft}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
     </div>
   )
 }
