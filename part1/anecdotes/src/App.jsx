@@ -22,18 +22,16 @@ const App = () => {
   const findMax = () => {
     let maxIndex = 0
     for(let i = 0; i < 8; i++) {
-      maxIndex = (points[i] > points[maxIndex]) ? i : maxIndex
+      maxIndex = (copy[i] >= copy[maxIndex]) ? i : maxIndex
     }
     return maxIndex
   }
 
   const addVote = () => {
-    setMostIndex(findMax)
     copy[selected] += 1
     setPoints(copy)
+    setMostIndex(findMax)
   }
-
-  const fixVoteCount = () => {return points[mostIndex] + 1}
 
   return (
     <div>
