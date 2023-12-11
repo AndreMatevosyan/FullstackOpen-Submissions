@@ -13,10 +13,38 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(new Uint8Array(8))
+  const [mostIndex, setMostIndex] = useState(1)
+  const copy = {...points}
+
+  const nextAnecdote = () => setSelected(Math.round(Math.random()*7))
+
+  const findMax = () => {
+    let maxIndex = 0
+    for(let i = 0; i < 8; i++) {
+      maxIndex = (points[i] > points[maxIndex]) ? i : maxIndex
+    }
+    return maxIndex
+  }
+
+  const addVote = () => {
+    setMostIndex(findMax)
+    copy[selected] += 1
+    setPoints(copy)
+  }
+
+  const fixVoteCount = () => {return points[mostIndex] + 1}
 
   return (
     <div>
-      {anecdotes[selected]}
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]} votes</p>
+      <button onClick={addVote}>vote</button>
+      <button onClick={nextAnecdote}>next anecdote</button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostIndex]}</p>
+      <p>has {points[mostIndex]} votes</p>
     </div>
   )
 }
