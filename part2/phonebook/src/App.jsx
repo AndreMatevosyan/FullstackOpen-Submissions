@@ -63,7 +63,18 @@ const App = () => {
         setPersons(persons.concat(response))
         setPersonsSearch(persons.concat(response))
       })
+  }
 
+  const removePerson = (id) => {
+    if (window.confirm()) {
+      personServices
+        .remove(id)
+        .then( response => {
+          setPersons(persons.filter(person => person.id != id))
+          setPersonsSearch(persons.filter(person => person.id != id))
+        })
+        .catch( (error) => console.log('error') )
+    }
   }
 
 
@@ -88,7 +99,10 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Persons persons={personsSearch}/>
+      <Persons 
+        persons={personsSearch} 
+        removePerson={removePerson}
+      />
 
     </div>
   )

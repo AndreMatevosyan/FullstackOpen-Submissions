@@ -10,6 +10,11 @@ const getAll = () => {
 const create = personObject => {
     const request = axios.post(url, personObject)
     return request.then(response => response.data)
-}   
+}  
 
-export default {getAll, create}
+const remove = id => {
+    const request = axios.delete(`http://localhost:3001/persons/${id}`)
+    return request.then(response => response.data)
+}
+
+export default {getAll, create, remove}
