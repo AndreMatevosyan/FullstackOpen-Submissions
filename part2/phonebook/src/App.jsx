@@ -45,32 +45,45 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault()
-    for(let i = 0; i < persons.length; i++) {
-      if (persons[i].name === newName) {
-        alert(`${newName} is already added to phonebook`)
-        return;
-      }
-    }
+
     const personObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1
+      id: persons[persons.length-1].id + 1
     }
+
+    for(let i = 0; i < persons.length; i++) {
+      if (persons[i].name === newName) {
+        if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+          personServices
+            .update(persons[i].id, personObject)
+            .then(response =>{
+              const newPersons = persons.map()
+              setPersons(newPersons)
+              setPersonsSearch(newPersons)
+            })
+        } 
+        return;
+      }
+    }
+
     personServices
       .create(personObject)
       .then(response => {
-        setPersons(persons.concat(response))
-        setPersonsSearch(persons.concat(response))
+        const newPersons = persons.concat(response)
+        setPersons(newPersons)
+        setPersonsSearch(newPersons)
       })
   }
 
   const removePerson = (id) => {
-    if (window.confirm()) {
+    if (window.confirm("Are you sure you want to delete?")) {
       personServices
         .remove(id)
         .then( response => {
-          setPersons(persons.filter(person => person.id != id))
-          setPersonsSearch(persons.filter(person => person.id != id))
+          const newPersons = persons.filter(person => person.id != id)
+          setPersons(newPersons)
+          setPersonsSearch(newPersons)
         })
         .catch( (error) => console.log('error') )
     }
