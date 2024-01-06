@@ -1,11 +1,16 @@
-const Notification = ( {message, type} ) => {
+import '../styles/index.css'
+
+const Notification = ( {message, error} ) => {
 
     if (message === null) {
         return null
     }
 
+    const messageStyle = error ?  'error' : 'update'
+    console.log(messageStyle)
+
     return (
-        <div className={type}>
+        <div className={messageStyle}>
             {message}
         </div>
     )

@@ -12,8 +12,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
   const [personsSearch, setPersonsSearch] = useState([])
-  const [message, setMessage] = useState('')
-  const [type, setType] = useState('')
+  const [message, setMessage] = useState(null)
+  const [isError, setIsError] = useState(0)
 
   useEffect(() => {
     personServices
@@ -79,9 +79,7 @@ const App = () => {
         setMessage(
           `Added ${newName}`
         )
-        setType(
-          'added'
-        )
+        setIsError(0)
         setTimeout(() => {
           setMessage(null)
         }, 5000)
@@ -98,7 +96,7 @@ const App = () => {
           setPersonsSearch(newPersons)
         })
         .catch( (error) => { 
-          setType('error')
+          setIsError(1)
           setMessage(
             `Information of ${
               persons.find(person => person.id === id).name
@@ -118,7 +116,7 @@ const App = () => {
 
       <Notification
         message={message}
-        type={type}
+        error={isError}
       />
 
       <Filter 
