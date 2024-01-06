@@ -61,7 +61,7 @@ const App = () => {
           personServices
             .update(persons[i].id, personObject)
             .then(response =>{
-              const newPersons = persons.map()
+              const newPersons = persons.map(person => person.name !== newName ? person :{...person, number:newNumber})
               setPersons(newPersons)
               setPersonsSearch(newPersons)
             })
