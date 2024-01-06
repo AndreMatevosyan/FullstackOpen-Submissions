@@ -22,4 +22,9 @@ const update = (id, personObject) => {
     return request.then(response => response.data)
 }
 
-export default {getAll, create, remove, update}
+const getName = (id) => {
+    const request = axios.get(`${url}/${id}`)
+    return request.then(response => response.data)
+}
+
+export default {getAll, create, remove, update, getName}

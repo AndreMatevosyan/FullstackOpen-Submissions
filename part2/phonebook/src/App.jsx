@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Notification from './components/Notification'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
@@ -11,6 +12,8 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
   const [personsSearch, setPersonsSearch] = useState([])
+  const [message, setMessage] = useState('')
+  const [type, setType] = useState('')
 
   useEffect(() => {
     personServices
@@ -73,10 +76,19 @@ const App = () => {
         const newPersons = persons.concat(response)
         setPersons(newPersons)
         setPersonsSearch(newPersons)
+        setMessage(
+          `Added ${newName}`
+        )
+        setType(
+          'added'
+        )
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
   }
 
-  const removePerson = (id) => {
+  const removePerson = ( id ) => {
     if (window.confirm("Are you sure you want to delete?")) {
       personServices
         .remove(id)
@@ -85,7 +97,17 @@ const App = () => {
           setPersons(newPersons)
           setPersonsSearch(newPersons)
         })
-        .catch( (error) => console.log('error') )
+        .catch( (error) => { 
+          setType('error')
+          setMessage(
+            `Information of ${
+              persons.find(person => person.id === id).name
+            } has already been removed from the server`
+          )
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+        })
     }
   }
 
@@ -93,6 +115,11 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification
+        message={message}
+        type={type}
+      />
 
       <Filter 
         newSearch={newSearch} 
