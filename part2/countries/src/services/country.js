@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const api_key = import.meta.env.VITE_SOME_KEY
+const api_key = import.meta.env.VITE_KEY
 
 const countryURL = 'https://studies.cs.helsinki.fi/restcountries/api/all'
 
