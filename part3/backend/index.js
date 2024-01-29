@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 
 app.use(express.json())
+app.use(express.static('dist'))
 
 let notes = [
   {
@@ -23,7 +24,7 @@ let notes = [
 
 
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+  response.send('/dist')
 })
 
 app.get('/api/notes', (request, response) => {
