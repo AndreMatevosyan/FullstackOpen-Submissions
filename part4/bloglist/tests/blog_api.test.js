@@ -28,6 +28,29 @@ test('unique identifier is named id', async () => {
   })
 })
 
+test('successfully created new blog', async () => {
+  const newBlog = {
+    title: 'Go To Statement Considered Harmful',
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+    likes: 5,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const blogsInDb = await helper.blogsInDb()
+  expect(blogsInDb).toHaveLength(helper.blogs.length + 1)
+
+  const titles = blogsInDb.map(blog => blog.title)
+  expect(titles).toContain(
+    'Go To Statement Considered Harmful'
+  )
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
