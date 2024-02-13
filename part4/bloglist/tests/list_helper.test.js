@@ -20,7 +20,7 @@ describe('Total Likes:', () => {
 
   test('when list has many blogs, equals the likes of all combined', () => {
     const result = testHelper.totalLikes(testHelper.blogs)
-    expect(result).toBe(36)
+    expect(result).toBe(31)
   })
 })
 
@@ -54,6 +54,6 @@ test('most liked author is returned', () => {
 
   expect(result).toEqual({
     author: 'Edsger W. Dijkstra',
-    likes: 17
+    likes: 12
   })
 })

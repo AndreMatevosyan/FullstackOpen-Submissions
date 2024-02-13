@@ -51,6 +51,44 @@ test('successfully created new blog', async () => {
   )
 })
 
+test('likes defaulted to zero if no data is available of them', async () => {
+  const newBlog = new Blog({
+    title: 'Go To Statement Considered Harmful',
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+  })
+
+  console.log(newBlog)
+
+  expect(newBlog.likes).toBe(0)
+})
+
+test('blogs without url are not entered into database', async () => {
+  const newBlog = {
+    title: 'Go To Statement Considered Harmful',
+    author: 'Edsger W. Dijkstra',
+    likes: 5,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
+test('blogs without title are not entered into database', async () => {
+  const newBlog = {
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+    likes: 5,
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
