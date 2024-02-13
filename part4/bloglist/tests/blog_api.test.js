@@ -20,6 +20,14 @@ test('returns correct number of blogs', async () => {
   expect(response.body).toHaveLength(helper.blogs.length)
 })
 
+test('unique identifier is named id', async () => {
+  const blogs = await Blog.find({})
+  blogs.forEach((blog) => {
+    expect(blog.id).toBeDefined()
+    console.log(blog.id)
+  })
+})
+
 afterAll(async () => {
   await mongoose.connection.close()
 })
