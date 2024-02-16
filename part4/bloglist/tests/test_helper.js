@@ -1,5 +1,6 @@
 const _ = require('lodash')
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
 const listWithOneBlog = [
   {
@@ -55,6 +56,23 @@ const blogs = [
   }
 ]
 
+const users = [
+  {
+    _id: '65cea58c1352fa14fe690928',
+    username: 'amatevo',
+    name: 'Andre Matevosyan',
+    passwordHash: '$2b$10$N1oymEllggu/A2avtLOmauymKJYvUTmpO5JfH.hf584tFb8FuGJe.',
+    __v: '0'
+  },
+  {
+    _id: '65ceab004e5c53b70b647589',
+    username: 'mluukkai',
+    name: 'Matti Luukkainen',
+    passwordHash: '$2b$10$qlffojDowoh0UCG8iDRhdukvssLodh7JkTYJKZ6LmgOd2OMiDTVH.',
+    __v: '0'
+  }
+]
+
 // eslint-disable-next-line no-unused-vars
 const dummy = (...params) => {
   return 1
@@ -105,13 +123,20 @@ const blogsInDb = async () => {
   return blogs.map(blog => blog.toJSON())
 }
 
+const usersInDb = async () => {
+  const users = await User.find({})
+  return users.map(user => user.toJSON())
+}
+
 module.exports = {
   listWithOneBlog,
   blogs,
+  users,
   dummy,
   totalLikes,
   favoriteBlog,
   mostWorks,
   mostLikes,
-  blogsInDb
+  blogsInDb,
+  usersInDb
 }

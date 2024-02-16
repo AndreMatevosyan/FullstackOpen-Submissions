@@ -128,7 +128,7 @@ describe('HTTP PUT', () => {
       .expect(200)
 
     const blogs = await helper.blogsInDb()
-    expect(blogs[0].likes).toBe(updatedBlog.likes)
+    expect(blogs[0].likes).toEqual(updatedBlog.likes)
   })
 })
 
