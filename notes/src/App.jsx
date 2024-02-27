@@ -40,10 +40,7 @@ const App = () => {
         setNewNote('')
       })
       .catch(error => {
-      alert(
-        `the note '${note.content}' was already deleted from server`
-      )
-      setNotes(notes.filter(n => n.id !== id))
+        console.log(error)
     })
   }
 
