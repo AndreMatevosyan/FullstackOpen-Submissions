@@ -14,11 +14,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [newBlog, setNewBlog] = useState({
-    title: '',
-    author: '',
-    url: '',
-  })
 
   const getBlogsAndUpdate = () => {
     blogService.getAll().then(blogs =>
@@ -72,8 +67,7 @@ const App = () => {
     window.localStorage.removeItem('blogsLoggedUser')
   }
 
-  const handleBlogCreation = (event) => {
-    event.preventDefault()
+  const handleBlogCreation = (newBlog) => {
     
     blogService
       .createBlog(newBlog)
@@ -123,8 +117,6 @@ const App = () => {
       <Toggleable buttonLabel="new note">
         <BlogForm
           handleBlogCreation={handleBlogCreation}
-          newBlog={newBlog}
-          setNewBlog={setNewBlog}
         />
       </Toggleable>
 
