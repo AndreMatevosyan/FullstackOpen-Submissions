@@ -12,7 +12,7 @@ const MoreInfo = forwardRef((props, refs) => {
 
     useImperativeHandle(refs, () => {
         return {
-            toggleVisibility
+            toggleVisibility,
         }
     })
 
