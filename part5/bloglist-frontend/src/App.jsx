@@ -131,6 +131,7 @@ const App = () => {
               key={blog.id} 
               blog={blog} 
               update={getBlogsAndUpdate}
+              user={user}
             />)
       }
     </div>

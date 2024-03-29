@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 import MoreInfo from "./MoreInfo"
 import blogService from "../services/blogs"
 
-const Blog = ({ blog, update }) => {
+const Blog = ({ blog, update, user }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [view, setView] = useState(false)
   
@@ -48,7 +48,7 @@ const Blog = ({ blog, update }) => {
         <a href={blog.url}>{blog.url}</a><br/>
         likes {likes} <button onClick={addLike}>like</button><br/>
         {blog.user.name}<br/>
-        <button onClick={deleteBlog}>remove</button>
+        {blog.user.username == user.username ? <button onClick={deleteBlog}>remove</button> : ''}
       </MoreInfo>
     </div>  
 )}
