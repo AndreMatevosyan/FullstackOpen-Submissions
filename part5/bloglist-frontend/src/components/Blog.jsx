@@ -1,11 +1,11 @@
-import { useRef, useState } from "react"
-import MoreInfo from "./MoreInfo"
-import blogService from "../services/blogs"
+import { useRef, useState } from 'react'
+import MoreInfo from './MoreInfo'
+import blogService from '../services/blogs'
 
 const Blog = ({ blog, update, user }) => {
   const [likes, setLikes] = useState(blog.likes)
   const [view, setView] = useState(false)
-  
+
   const infoRef = useRef()
 
   const changeView = () => {
@@ -16,13 +16,13 @@ const Blog = ({ blog, update, user }) => {
   const addLike = () => {
     console.log(blog.id)
     blogService
-      .updateBlog(blog.id, {...blog, likes: likes + 1})
+      .updateBlog(blog.id, { ...blog, likes: likes + 1 })
       .then(response => {
         console.log(response)
         setLikes(likes + 1)
       })
       .catch(error => console.log(error))
-      update()
+    update()
   }
 
   const deleteBlog = () => {
@@ -31,7 +31,7 @@ const Blog = ({ blog, update, user }) => {
       blogService
         .deleteBlog(blog.id)
         .then(() => {
-          console.log("blog deleted")
+          console.log('blog deleted')
           update()
         })
         .catch(error => console.log(error))
@@ -48,9 +48,9 @@ const Blog = ({ blog, update, user }) => {
         <a href={blog.url}>{blog.url}</a><br/>
         likes {likes} <button onClick={addLike}>like</button><br/>
         {blog.user.name}<br/>
-        {blog.user.username == user.username ? <button onClick={deleteBlog}>remove</button> : ''}
+        {blog.user.username === user.username ? <button onClick={deleteBlog}>remove</button> : ''}
       </MoreInfo>
-    </div>  
-)}
+    </div>
+  )}
 
 export default Blog

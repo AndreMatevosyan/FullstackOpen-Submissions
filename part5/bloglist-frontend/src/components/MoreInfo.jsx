@@ -2,25 +2,27 @@ import { useImperativeHandle, forwardRef, useState } from 'react'
 
 const MoreInfo = forwardRef((props, refs) => {
 
-    const [showView, setShowView] = useState(false)
+  const [showView, setShowView] = useState(false)
 
-    const detailsStyle = showView ? {display: ''} : {display: 'none'}
+  const detailsStyle = showView ? { display: '' } : { display: 'none' }
 
-    const toggleVisibility = () => {
-        setShowView(!showView)
+  const toggleVisibility = () => {
+    setShowView(!showView)
+  }
+
+  useImperativeHandle(refs, () => {
+    return {
+      toggleVisibility,
     }
+  })
 
-    useImperativeHandle(refs, () => {
-        return {
-            toggleVisibility,
-        }
-    })
-
-    return (
-        <div style={detailsStyle}>
-            {props.children}
-        </div>
-    )
+  return (
+    <div style={detailsStyle}>
+      {props.children}
+    </div>
+  )
 })
+
+MoreInfo.displayName = 'MoreInfo'
 
 export default MoreInfo

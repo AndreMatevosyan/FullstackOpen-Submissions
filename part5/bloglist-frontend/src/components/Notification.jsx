@@ -1,18 +1,18 @@
 import '../index.css'
 
-const Notification = ( {message, error} ) => {
+const Notification = ( { message, error } ) => {
 
-    if (!message) {
-        return null
-    }
+  if (!message) {
+    return null
+  }
 
-    const messageStyle = error ?  'error' : 'added'
+  const messageStyle = error ?  'error' : 'added'
 
-    return (
-        <div className={messageStyle}>
-            {message}
-        </div>
-    )
+  return (
+    <div className={messageStyle}>
+      {message}
+    </div>
+  )
 }
 
 export default Notification

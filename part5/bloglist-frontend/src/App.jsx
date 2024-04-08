@@ -19,7 +19,7 @@ const App = () => {
   const getBlogsAndUpdate = () => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    ) 
+    )
   }
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const App = () => {
 
     try {
       const user = await loginService.login({ username, password })
-      
+
       window.localStorage.setItem(
         'blogsLoggedUser', JSON.stringify(user)
       )
@@ -69,7 +69,7 @@ const App = () => {
   }
 
   const handleBlogCreation = (newBlog) => {
-    
+
     blogService
       .createBlog(newBlog)
       .then(response => {
@@ -126,10 +126,10 @@ const App = () => {
           .sort((a, b) => {
             return b.likes - a.likes
           })
-          .map(blog => 
-            <Blog 
-              key={blog.id} 
-              blog={blog} 
+          .map(blog =>
+            <Blog
+              key={blog.id}
+              blog={blog}
               update={getBlogsAndUpdate}
               user={user}
             />)
