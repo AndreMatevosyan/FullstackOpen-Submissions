@@ -45,10 +45,12 @@ const Blog = ({ blog, update, user }) => {
         {view ? 'close' : 'view'}
       </button>
       <MoreInfo ref={infoRef}>
-        <a href={blog.url}>{blog.url}</a><br/>
-        likes {likes} <button onClick={addLike}>like</button><br/>
-        {blog.user.name}<br/>
-        {blog.user.username === user.username ? <button onClick={deleteBlog}>remove</button> : ''}
+        <div className='blogInfd'>
+          <a href={blog.url}>{blog.url}</a><br/>
+          likes {likes} <button onClick={addLike}>like</button><br/>
+          {blog.user.name}<br/>
+          {blog.user.username === user.username ? <button onClick={deleteBlog}>remove</button> : ''}
+        </div>
       </MoreInfo>
     </div>
   )}
